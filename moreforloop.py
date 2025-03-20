@@ -3,22 +3,29 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 @app.route("/", methods=["GET","POST"])
-
 def main():
-    if(request.method == "POST"):
-        MainScreen();
-        return render_template("forloopintro.html",mylistlen=mylistlen,mylist=mylist)
+    if(request.method == "GET"):
+        return render_template("personinfo.html")
     else:
-        return render_template("indexfor.html")
+        return GetInfo()
     
-def MainScreen():
-    global mylist
-    global mylistlen
+def GetInfo():
+    global headings, data
+    headings = ("Course","Teacher")
+    course1 = request.form.get("txtcoursename1")
+    teacher1 = request.form.get("txtteacher1")
+    course2 = request.form.get("txtcoursename2")
+    teacher2 = request.form.get("txtteacher2")
 
-    mylist = []
-    mylist = ["Math","Science","English","History","Software Engineering"]
-    mylistlen = len(mylist)
-    return mylistlen,mylist
+    data = (
+        (course1, teacher1),
+        (course2, teacher2)
+        )
+    return DisplayInfo()
+
+def DisplayInfo()
+    return render_template("output2.html",mylistlen=mylistlen,mylist=mylist)
+
 
 if __name__=="__main__":
     app.run();
