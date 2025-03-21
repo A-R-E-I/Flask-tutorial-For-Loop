@@ -5,7 +5,7 @@ app = Flask(__name__)
 @app.route("/", methods=["GET","POST"])
 def main():
     if(request.method == "GET"):
-        return render_template("personinfo.html")
+        return render_template("personinfo2.html")
     else:
         return GetInfo()
     
@@ -23,8 +23,8 @@ def GetInfo():
         )
     return DisplayInfo()
 
-def DisplayInfo()
-    return render_template("output2.html",mylistlen=mylistlen,mylist=mylist)
+def DisplayInfo():
+    return render_template("output2.html",headings=headings,data=data)
 
 
 if __name__=="__main__":
